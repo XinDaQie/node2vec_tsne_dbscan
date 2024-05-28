@@ -1,6 +1,6 @@
 import networkx as nx
 import argparse
-import pandas as pd 
+import pandas as pd
 import json
 from tqdm import tqdm
 from node2vec import node2vec
@@ -37,4 +37,5 @@ if __name__ == '__main__':
 
     with open('./data/embeddings_test.json', 'w') as json_file:
         json.dump(embeddings, json_file)
+
     # print(embeddings)

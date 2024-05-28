@@ -1,9 +1,9 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 import seaborn as sns  # 热力图
 from tqdm import tqdm  # 在迭代时显示进度条
 import math
-import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 
 plt.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
@@ -11,8 +11,8 @@ plt.rcParams['axes.unicode_minus'] = False
 
 # 使用pandas的read_json()方法读取JSON文件  
 matrix_2012 = pd.read_json('./Sectors_Carbon_Transfer/sector_carbon_transfer_2012.json')
-df2 = pd.read_json('./Sectors_Carbon_Transfer/sector_carbon_transfer_2015.json')
-df3 = pd.read_json('./Sectors_Carbon_Transfer/sector_carbon_transfer_2017.json')
+matrix_2015 = pd.read_json('./Sectors_Carbon_Transfer/sector_carbon_transfer_2015.json')
+matrix_2017 = pd.read_json('./Sectors_Carbon_Transfer/sector_carbon_transfer_2017.json')
 
 Area = ["北京", "天津", "河北", "山西", "内蒙古", "辽宁", "吉林", "黑龙江", "上海",
         "江苏", "浙江", "安徽", "福建", "江西", "山东", "河南", "湖北", "湖南", "广东",
@@ -20,16 +20,15 @@ Area = ["北京", "天津", "河北", "山西", "内蒙古", "辽宁", "吉林",
 arr = np.zeros((len(Area), len(Area)))
 province = pd.DataFrame(arr, index=Area, columns=Area)
 
-for i in tqdm(range(matrix_2012.shape[0])):
+for i in tqdm(range(matrix_2017.shape[0])):
     index = Area[math.ceil(i / 28) - 1]
-    for j in range(matrix_2012.shape[1]):
+    for j in range(matrix_2017.shape[1]):
         column = Area[math.ceil(j / 28) - 1]
-        province.loc[index, column] += matrix_2012.iloc[i, j]
+        province.loc[index, column] += matrix_2017.iloc[i, j]
 
-province.to_json('./data/province.json')
-
-
+province.to_excel("./data/province.xlsx")
 # province=pd.DataFrame(arr)
+
 
 def plot(province):
     # 创建画布和网格布局
