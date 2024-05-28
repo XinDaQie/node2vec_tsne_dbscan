@@ -21,10 +21,11 @@ arr = np.zeros((len(Area), len(Area)))
 province = pd.DataFrame(arr, index=Area, columns=Area)
 
 for i in tqdm(range(matrix_2017.shape[0])):
-    index = Area[math.ceil(i / 28) - 1]
+    index = Area[i // 28]
     for j in range(matrix_2017.shape[1]):
-        column = Area[math.ceil(j / 28) - 1]
+        column = Area[j // 28]
         province.loc[index, column] += matrix_2017.iloc[i, j]
+
 
 province.to_excel("./data/province.xlsx")
 # province=pd.DataFrame(arr)
