@@ -20,6 +20,7 @@ Area = ["北京", "天津", "河北", "山西", "内蒙古", "辽宁", "吉林",
 arr = np.zeros((len(Area), len(Area)))
 province = pd.DataFrame(arr, index=Area, columns=Area)
 
+#
 for i in tqdm(range(matrix_2017.shape[0])):
     index = Area[i // 28]
     for j in range(matrix_2017.shape[1]):
