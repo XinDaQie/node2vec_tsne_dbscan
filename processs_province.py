@@ -3,7 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns  # 热力图
 from tqdm import tqdm  # 在迭代时显示进度条
-import math
 from matplotlib.gridspec import GridSpec
 
 plt.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
@@ -20,18 +19,17 @@ Area = ["北京", "天津", "河北", "山西", "内蒙古", "辽宁", "吉林",
 arr = np.zeros((len(Area), len(Area)))
 province = pd.DataFrame(arr, index=Area, columns=Area)
 
-#
+# 读取数据
 for i in tqdm(range(matrix_2017.shape[0])):
     index = Area[i // 28]
     for j in range(matrix_2017.shape[1]):
         column = Area[j // 28]
         province.loc[index, column] += matrix_2017.iloc[i, j]
 
-
 province.to_excel("./data/province.xlsx")
-# province=pd.DataFrame(arr)
 
 
+# 绘制热力图
 def plot(province):
     # 创建画布和网格布局
     fig = plt.figure(figsize=(12, 10))
