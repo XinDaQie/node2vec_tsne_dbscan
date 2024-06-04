@@ -87,7 +87,10 @@ class node2vec:
             probs = [g[node][n]['weight'] for n in nbs]
             # Normalized
             norm = sum(probs)
-            normalized_probs = [float(n) / norm for n in probs]
+            if norm == 0 or np.isnan(norm):
+                normalized_probs = [0 for n in probs]  # 避免除以零或NaN的情况
+            else:
+                normalized_probs = [float(n) / norm for n in probs]
             nodes_info[node] = alias_setup(normalized_probs)
 
         for edge in g.edges:
@@ -116,7 +119,10 @@ class node2vec:
             else:
                 unnormalized_probs.append(g[v][v_nbr]['weight'] / self.args.q)
         norm_const = sum(unnormalized_probs)
-        normalized_probs = [float(u_prob) / norm_const for u_prob in unnormalized_probs]
+        if norm_const == 0 or np.isnan(norm_const):
+            normalized_probs = [0 for u_prob in unnormalized_probs]  # 避免除以零或NaN的情况
+        else:
+            normalized_probs = [float(u_prob) / norm_const for u_prob in unnormalized_probs]
 
         return alias_setup(normalized_probs)
 
