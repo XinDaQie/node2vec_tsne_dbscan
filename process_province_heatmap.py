@@ -26,7 +26,7 @@ for i in tqdm(range(matrix_2017.shape[0])):
         column = Area[j // 28]
         province.loc[index, column] += matrix_2017.iloc[i, j]
 
-province.to_excel("./data/province.xlsx")
+province.to_excel("./data/province_2017.xlsx")
 
 
 # 绘制热力图
