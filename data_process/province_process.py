@@ -5,7 +5,7 @@ import seaborn as sns  # 热力图
 from tqdm import tqdm  # 在迭代时显示进度条
 from matplotlib.gridspec import GridSpec
 
-plt.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
+plt.rcParams["font.sans-serif"] = ["STHeiti"]
 plt.rcParams['axes.unicode_minus'] = False
 
 # 使用pandas的read_json()方法读取JSON文件  

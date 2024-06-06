@@ -58,7 +58,7 @@ Area = ["北京", "天津", "河北", "山西", "内蒙古", "辽宁", "吉林",
         "江苏", "浙江", "安徽", "福建", "江西", "山东", "河南", "湖北", "湖南", "广东",
         "广西", "海南", "重庆", "四川", "贵州", "云南", "陕西", "甘肃", "青海", "宁夏", "新疆"]
 
-department = ["农林牧渔水利", "煤炭采选", "石油天然气开采", "黑色金属采选", "非金属矿产采选", "食品加工",
+Department = ["农林牧渔水利", "煤炭采选", "石油天然气开采", "黑色金属采选", "非金属矿产采选", "食品加工",
               "纺织工业", "服装及其他纤维制品", "木材加工, 竹, 甘蔗, 棕榈纤维及草制品", "造纸及纸制品",
               "石油加工及焦化", "化工原料及化工产品", "非金属矿产品", "黑色金属冶炼及压延", "金属制品",
               "普通机械", "特殊用途设备", "交通运输设备", "电气设备与机械", "电子通讯设备", "仪器仪表,文化办公机械",
@@ -70,10 +70,10 @@ def Process(matrix):
     index_list = []
     column_list = []
     for i in matrix.index:
-        index = department[(i + 1) % 28 - 1]
+        index = Department[(i + 1) % 28 - 1]
         index_list.append(index)
     for j in matrix.columns:
-        column = department[(j + 1) % 28 - 1]
+        column = Department[(j + 1) % 28 - 1]
         column_list.append(column)
 
     matrix.index = index_list
