@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ECharts 柱状图</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <style>
+        #main {
+            width: 1000px; /* 设置图表的宽度 */
+            height: 1000px; /* 设置图表的高度 */
+            position: absolute; 
+        }
+
+        #bar-bottom {
+            width: 80%; /* 设置图表的宽度 */
+            height: 20%; /* 设置图表的高度 */
+        }
+
+        #bar-right {
+            width: 80%; /* 设置图表的宽度 */
+            height: 20%; /* 设置图表的高度 */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 创建一个用于放置图表的容器 -->
+    <div id="main">
+        <div id="heatmap"></div>
+        <div id="bar-bottom"></div>
+        <div id="bar-right"></div>
+    </div>
+
+    <script>
+        const xData =  ["BJ", "TJ", "HE", "SX", "IM", "LN", "JL", "HL", "SH", "JS", 
+        "ZJ", "AH", "FJ", "JX", "SD", "HA", "HB", "HN", "GD", "GX", 
+        "HI", "CQ", "SC", "GZ", "YN", "SN", "GS", "QH", "NX", "XJ"]; // SN -> 陕西
+        const colSum = [284.48887178550007,206.05474934050002,769.4138314015999,455.8351450459,531.9547173203,467.16008887360005,252.00742536779998,186.81869691110003,244.7234742669,1170.4279339665998,708.2433870966001,527.2396755415999,251.15593145649996,410.86629043410005,944.8746004998002,834.1464490436999,340.3119294848,351.62440459820004,922.6985998995,267.78104692679995,59.12101076770001,358.31728012329995,405.13763836339996,286.1161602323999,245.89492340590002,349.35738834989996,140.0040544018,65.5838475953,164.3383201602,375.2657897064]
+
+        // 绘制碳流入柱状图
+        const bar_bottom = echarts.init(document.getElementById('bar-bottom'));
+        bar_bottom.setOption({
+            title: {
+                text: '碳流入柱状图'
+            },
+            grid: {
+                left: '10%',
+                right: '',
+                top: "20%",
+                bottom: '10%',
+            },
+            tooltip: {
+                trigger: 'axis', // 可选 'item' 或 'axis'
+                axisPointer: {
+                    type: 'shadow' // 可选 'line' 或 'shadow'
+                },
+                formatter: function (params) {
+                    var result = '';
+                    params.forEach(function (item) {
+                        result += '碳流入<br/>' + item.name + ": " + item.value.toFixed(3) + '<br/>';
+                    });
+                    return result;
+                }
+            },
+            xAxis: {
+                type: 'category',
+                data: xData,
+            },
+            yAxis: {
+                type: 'value',
+                inverse: true,
+                show: false,
+            },
+            series: [{
+                name: "Sale",
+                data: colSum,
+                type: 'bar',
+                inverse: true,
+                barWidth: '90%', // 设置柱子的宽度
+                barGap: '0%'
+            }]
+        });
+
+    </script>
+</body>

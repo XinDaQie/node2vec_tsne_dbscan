@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.min.js"></script>
+
+    <style>
+        #main1 {
+            width: 50%; /* 设置图表的宽度 */
+            height: 50%; /* 设置图表的高度 */
+            /* position: absolute;  */
+        }
+        #main2 {
+            width: 50%; /* 设置图表的宽度 */
+            height: 50%; /* 设置图表的高度 */
+            /* position: absolute;  */
+        }
+    </style>
+</head>
+
+<body style="height: 100%; margin: 0">
+    <div id="main1"></div>
+    <div id="main2"></div>
+    <script type="text/javascript">
+        // 创建第一个图表实例
+        var chart1 = echarts.init(document.getElementById('main1'));
+        var option1 = {
+            // 配置第一个图表的选项
+            xAxis: { type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] },
+            yAxis: { type: 'value' },
+            tooltip: {
+                trigger: 'axis', // 可选 'item' 或 'axis'
+                axisPointer: {
+                    type: 'shadow' // 可选 'line' 或 'shadow'
+                },
+                formatter: function (params) {
+                    var result = '';
+                    params.forEach(function (item) {
+                        result += '碳流入<br/>' + item.name + ": " + item.value.toFixed(3) + '<br/>';
+                    });
+                    return result;
+                }
+            },
+            series: [{ type: 'bar', data: [820, 932, 901, 934, 1290, 1330, 1320] }]
+        };
+        chart1.setOption(option1);
+
+        // 创建第二个图表实例
+        var chart2 = echarts.init(document.getElementById('main2'));
+        var option2 = {
+            // 配置第二个图表的选项
+            xAxis: { type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] },
+            yAxis: { type: 'value' },
+            tooltip: {
+                trigger: 'axis', // 可选 'item' 或 'axis'
+                axisPointer: {
+                    type: 'shadow' // 可选 'line' 或 'shadow'
+                },
+                formatter: function (params) {
+                    var result = '';
+                    params.forEach(function (item) {
+                        result += '碳流入<br/>' + item.name + ": " + item.value.toFixed(3) + '<br/>';
+                    });
+                    return result;
+                }
+            },
+            series: [{ type: 'line', data: [120, 200, 150, 80, 70, 110, 130] }]
+        };
+        chart2.setOption(option2);
+
+        // 联动两个图表
+        echarts.connect([chart1, chart2]);
+
+    </script>
+</body>
+</html>
