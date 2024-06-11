@@ -66,21 +66,25 @@
         const rows = matrix.length;
         const cols = matrix[0].length;
 
-        // 计算每一列的和(碳流入) 可以用静态数据
+        // 计算每一列的和(碳流入) 不计算本省到本省
         const colSum = new Array(cols).fill(0);
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < cols; j++) {
-                colSum[j] += matrix[i][j];
+                if (i != j) {
+                    colSum[j] += matrix[i][j];
+                }
             }
         }
 
-        // 计算每一行的和(碳流出) 可以用静态数据
+        // 计算每一行的和(碳流出) 不计算本省到本省
         const rowSum = new Array(rows).fill(0);
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < cols; j++) {
-                rowSum[i] += matrix[i][j];
+                if (i != j) {
+                    rowSum[i] += matrix[i][j];
+                }
             }
-        }   
+        }    
 
         // 将二维数组转换为ECharts热力图所需的格式 
         // const data = [];
