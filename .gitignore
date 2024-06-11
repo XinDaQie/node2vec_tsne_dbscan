@@ -10,3 +10,6 @@
 # 忽略pycharm自带的文件夹
 /.idea/
 /__pycache__/
+.*
+!.git
+!.gitignore
