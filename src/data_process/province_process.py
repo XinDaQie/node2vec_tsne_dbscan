@@ -21,9 +21,9 @@ provinces = pd.DataFrame(arr, index=Area, columns=Area)
 
 # 读取数据
 for i in tqdm(range(matrix_2017.shape[0])):
-    index = Area[i // 28]
+    index = Area[i // 28] # 省份是 0 - 29
     for j in range(matrix_2017.shape[1]):
-        column = Area[j // 28]
+        column = Area[j // 28] 
         provinces.loc[index, column] += matrix_2017.iloc[i, j]
 
 provinces.to_excel("./data/province_2017.xlsx")
